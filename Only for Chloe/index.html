@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Chloe Only</title>
+    <style>
+        :root {
+            --bg-color: #fdf6e3;
+            --primary-color: #d4a373;
+            --accent-color: #ffb7b2;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; background-color: var(--bg-color);
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+            overflow: hidden; touch-action: manipulation;
+            -webkit-user-select: none; user-select: none;
+        }
+
+        #container { 
+            text-align: center; width: 90%; max-width: 400px; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .hidden { display: none !important; }
+
+        /* 1. 密码验证页 */
+        #login-screen { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .names { font-weight: bold; font-size: 24px; color: var(--primary-color); margin-bottom: 5px; }
+        input[type="password"] { padding: 12px; border: 1px solid #ddd; border-radius: 25px; text-align: center; width: 200px; font-size: 16px; outline: none; }
+        .login-btn { background: var(--primary-color); color: white; border: none; padding: 10px 45px; border-radius: 25px; cursor: pointer; font-size: 16px; }
+
+        /* 2. 礼物封面 */
+        #gift-screen { flex-direction: column; align-items: center; cursor: pointer; }
+        .gift-box { font-size: 80px; animation: bounce 2s infinite; }
+
+        /* 3. 道歉信页面 */
+        #letter-screen {
+            background: #fffef9; padding: 30px 20px; border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: left; line-height: 1.7;
+            animation: slideUp 0.6s ease; width: 100%; box-sizing: border-box;
+            max-height: 80vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
+        }
+        .letter-header { font-weight: bold; color: var(--primary-color); font-size: 18px; margin-bottom: 12px; display: block; }
+        .letter-content { font-size: 15px; color: #444; white-space: pre-wrap; word-break: break-all; -webkit-user-select: text; user-select: text; }
+        .letter-footer { text-align: right; font-weight: bold; color: var(--primary-color); display: block; margin-top: 15px; }
+        .letter-btn {
+            display: block; width: 100%; padding: 12px; margin-top: 20px;
+            background: var(--accent-color); color: white; border: none; border-radius: 25px; font-weight: bold;
+        }
+
+        /* 4. 抉择页面 */
+        #main-content { 
+            display: flex; flex-direction: column; align-items: center; width: 100%; 
+            position: relative; height: 350px; justify-content: center;
+        }
+        .emoji { font-size: 80px; margin-bottom: 10px; }
+        
+        .btn-wrapper { position: relative; width: 100%; height: 120px; margin-top: 20px; }
+        button.decision-btn {
+            padding: 12px 35px; font-size: 18px; border: none; 
+            border-radius: 25px; cursor: pointer; position: absolute;
+            transition: all 0.15s ease-out;
+        }
+        #yes-btn { background-color: var(--accent-color); color: white; left: calc(50% - 95px); top: 30px; }
+        #no-btn { background-color: #e2e2e2; color: #666; left: calc(50% + 10px); top: 30px; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-20px);} }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <div id="login-screen">
+        <div style="font-size: 11px; letter-spacing: 3px; color: #bbb;">CONFIDENTIAL</div>
+        <div class="names">❤ Leo & Chloe ❤</div>
+        <input type="password" id="passwordInput" placeholder="请输入密码" maxlength="6" inputmode="numeric">
+        <button class="login-btn" onclick="checkPassword()">进入</button>
+    </div>
+
+    <div id="gift-screen" class="hidden" onclick="showLetter()">
+        <div class="gift-box">🎁</div>
+        <p style="color: #888; margin-top: 15px;">Leo🦁 给你准备了一个小小礼物<br>点击开启❤</p>
+    </div>
+
+    <div id="letter-screen" class="hidden">
+        <span class="letter-header">最最亲爱的老婆 Chloe：</span>
+        <div class="letter-content">宝宝，我这几天在做这个网页，呜呜呜终于可以给你啦~ 虽然代码全是找 AI 帮忙写的，但我一直在很用心地调教它，也很辛苦的😭。
+
+你的小狗狗真的知道错惹，我再也再也不会了真的（摇尾巴）🐕。
+
+我的宝宝对我很好很爱我，我真的很幸福。我们吵架归吵架，但我不应该每次生气上头就做那样伤害你的事情。我真的狠狠地反省了我自己，我真的不想你不爱我，我不能想象我没有老婆的日子是怎么样的 🥺。
+
+情人节我会加倍补偿给老婆的，上次吃的那家也一般般，男朋友会重新带宝宝吃一家精致一点的餐厅，呜呜呜呜，亲亲老婆 💋。
+
+对了老婆，你给我买的手镯也找到了！我姥爷说那个卡扣那边不太好，好像就是很容易掉，后面回北京我们得去售后一下呀老婆 ~~ 我真的很爱惜老婆给我的东西的呜呜呜 ✨。
+
+我不要离开老婆，我要老婆爱我！❤️</div>
+        <span class="letter-footer">—— 你的小狗狗 Leo 🦁</span>
+        <button class="letter-btn" onclick="showDecision()">我读完了</button>
+    </div>
+
+    <div id="main-content" class="hidden">
+        <div class="emoji" id="main-emoji">😊</div>
+        <h2 id="question">老婆，我们可以和好吗？</h2>
+        <div class="btn-wrapper" id="area">
+            <button id="yes-btn" class="decision-btn" onclick="handleYes()">好</button>
+            <button id="no-btn" class="decision-btn" onmouseover="moveButton(event)" onmousedown="moveButton(event)" ontouchstart="moveButton(event)">不好</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function checkPassword() {
+        const val = document.getElementById('passwordInput').value;
+        if (val === '011125') {
+            document.getElementById('login-screen').classList.add('hidden');
+            const gift = document.getElementById('gift-screen');
+            gift.classList.remove('hidden'); gift.style.display = 'flex';
+        } else { 
+            alert('密码不对哦，再想一想(宝宝肯定知道的)~ \nHint: 纪念日（六位哦）'); 
+        }
+    }
+
+    function showLetter() {
+        document.getElementById('gift-screen').style.display = 'none';
+        document.getElementById('letter-screen').classList.remove('hidden');
+    }
+
+    function showDecision() {
+        document.getElementById('letter-screen').classList.add('hidden');
+        const main = document.getElementById('main-content');
+        main.classList.remove('hidden'); main.style.display = 'flex';
+    }
+
+    function moveButton(event) {
+        if(event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        const btn = document.getElementById('no-btn');
+        const area = document.getElementById('area');
+        const maxX = area.offsetWidth - btn.offsetWidth - 5;
+        const maxY = area.offsetHeight - btn.offsetHeight - 5;
+        const randomX = Math.max(5, Math.floor(Math.random() * maxX));
+        const randomY = Math.max(5, Math.floor(Math.random() * maxY));
+        btn.style.left = randomX + 'px';
+        btn.style.top = randomY + 'px';
+    }
+
+    function handleYes() {
+        const emoji = document.getElementById('main-emoji');
+        const question = document.getElementById('question');
+        const area = document.getElementById('area');
+        emoji.innerText = '🥰';
+        question.innerText = '我的老婆最好了！我会好好爱我老婆的！MuaMuaMuaMua！';
+        
+        // 点击最后的爱心按钮会刷新页面回到初始验证页
+        area.innerHTML = '<button class="decision-btn" style="width: 80%; left:10%; top:20px; background: var(--accent-color); color:white" onclick="location.reload()">❤️</button>';
+        
+        setInterval(createHeart, 300);
+    }
+
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️'; heart.style.position = 'fixed';
+        heart.style.left = Math.random() * 100 + 'vw'; heart.style.top = '-20px';
+        heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+        heart.style.transition = 'transform 3s linear';
+        heart.style.zIndex = '9999';
+        heart.style.pointerEvents = 'none';
+        document.body.appendChild(heart);
+        setTimeout(() => {
+            heart.style.transform = `translateY(${window.innerHeight + 50}px)`;
+        }, 100);
+        setTimeout(() => {
+            heart.remove();
+        }, 3000);
+    }
+</script>
+
+</body>
+</html>
